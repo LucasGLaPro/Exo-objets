@@ -1,9 +1,13 @@
 <?php
 include "classexo7.php";
-$perso1 = new user(1);
-$perso1->Personnage();
+$Players = array();
+$MaBase = new PDO('mysql:host=192.168.65.192; dbname=Objet-Lucas-Ex1; charset=utf8','lucas', 'lucas');
+                    $query = $MaBase->query("SELECT * FROM personnage");
 
-$perso2 = new user(2);
-$perso2->Personnage();
+                while($userArray = $query->fetch())
+                    array_push($Players, new user($userArray));
+            
+                foreach($Players as $value) 
+                    $value->Personnage();
 
 ?>
